@@ -217,11 +217,15 @@
             }
 
             url += '://' + host;
-            if(port) {
+            if (port) {
                 url += ':' + port;
             }
-            url += '/' + path;
-
+            const pathname = window.location.pathname;
+            if (pathname) {
+                url += pathname + '/' + path;
+            } else {
+                url += '/' + path;
+            }
             rfb = new RFB(document.body, url,
                           { repeaterID: WebUtil.getConfigVar('repeaterID', ''),
                             shared: WebUtil.getConfigVar('shared', true),
